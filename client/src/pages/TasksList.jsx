@@ -314,6 +314,7 @@ class TasksList extends Component {
                             <div className="red text-right"><DeleteTasks id="deleteAll"/></div>
                         </div>
                     </div>
+                    &nbsp;
                     <div className="row">
                         <div className="col">
                             <TasksInsert id="createTask" />
