@@ -83,6 +83,23 @@ deleteAllTasks = async (req, res) => {
     }).catch(err => console.log(err))
 }
 
+// Delete single task
+deleteTask = async (req, res) => {
+    await Task.findOneAndDelete({ _id: req.params.id }, (err, task) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
+
+        if (!task) {
+            return res
+                .status(404)
+                .json({ success: false, error: `Task not found` })
+        }
+
+        return res.status(200).json({ success: true, data: task })
+    }).catch(err => console.log(err))
+}
+
 // find all tasks
 getAllTasks = async (req, res) => {
     await Task.find({}, (err, tasks) => {
@@ -102,5 +119,6 @@ module.exports = {
     createTask,
     updateTask,
     deleteAllTasks,
+    deleteTask,
     getAllTasks,
 }

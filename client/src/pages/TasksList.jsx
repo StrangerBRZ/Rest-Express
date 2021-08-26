@@ -41,6 +41,12 @@ const UpdateChecked = styled.input.attrs({
     color: #ef9b0f;
     cursor: pointer;
 `
+const Delete = styled.button.attrs({
+    className: `btn btn-sm btn-outline-danger float-right`
+})`
+    margin-left:20px;
+    border:none !important;
+`
 
 const DeleteAll = styled.button.attrs({
     className: `btn btn-danger`,
@@ -91,6 +97,25 @@ class DeleteTasks extends Component {
 
     render() {
         return <DeleteAll onClick={this.clearTasks}>Delete All</DeleteAll>
+    }
+}
+
+// delete a single task
+class DeleteTask extends Component {
+    clearTask = event => {
+        event.preventDefault()
+
+        if (
+            window.confirm(
+            `Do you want to delete this task permanently?`,
+            )
+        ) {
+            api.deleteTaskById(this.props.id)
+            window.location.reload()
+        }
+    }
+    render() {
+        return <Delete onClick={this.clearTask}>Delete</Delete>
     }
 }
 
@@ -189,7 +214,7 @@ class ToDoList extends Component {
 
     getTableRow(task) {
         return(
-            <tr key={task._id}><td key={task._id}><UpdateTask id={task._id} originalStatus={task.status}></UpdateTask> {task.name}</td></tr>
+            <tr key={task._id}><td key={task._id}><UpdateTask id={task._id} originalStatus={task.status}></UpdateTask> {task.name} <DeleteTask id={task._id}></DeleteTask></td></tr>
         )
     }
     render() {
@@ -234,7 +259,7 @@ class DoneList extends Component {
 
     getTableRow(task) {
         return(
-            <tr key={task._id}><td key={task._id}><UpdateTask id={task._id} originalStatus={task.status}></UpdateTask> {task.name}</td></tr>
+            <tr key={task._id}><td key={task._id}><UpdateTask id={task._id} originalStatus={task.status}></UpdateTask> {task.name} <DeleteTask id={task._id}></DeleteTask></td></tr>
         )
     }
     render() {
@@ -305,7 +330,7 @@ class TasksList extends Component {
                     <hr></hr>
                     <div className="row">
                         <div className="col">
-                            <table id="toDoTable" className="mytable" data-name="mytable">
+                            <table id="toDoTable" className="mytable w-100" data-name="mytable">
                                 <tbody>
                                     <ToDoList></ToDoList>
                                 </tbody>
@@ -313,7 +338,7 @@ class TasksList extends Component {
                             </table>
                         </div>
                         <div className="col">
-                            <table id="doneTable" className="mytable" data-name="mytable">
+                            <table id="doneTable" className="mytable w-100" data-name="mytable">
                                 <tbody>
                                     <DoneList></DoneList>
                                 </tbody>
