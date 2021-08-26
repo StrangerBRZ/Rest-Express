@@ -7,7 +7,6 @@ import styled from 'styled-components'
 const Container = styled.div.attrs({
     className: 'container',
 })`
-    margin: 0;
     padding: 20px 0;
 `
 
