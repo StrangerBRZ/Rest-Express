@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL: 'http://localhost:3000/api',
+    baseURL: 'https://rest-express-app.herokuapp.com/api',
 })
 
 export const insertTask = payload => api.post(`/task`, payload)
