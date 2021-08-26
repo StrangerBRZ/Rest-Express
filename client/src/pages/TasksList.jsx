@@ -90,8 +90,9 @@ class DeleteTasks extends Component {
                 `Do you want to delete all the tasks permanently?`,
             )
         ) {
-            api.deleteAllTasks()
-            window.location.reload()
+            api.deleteAllTasks().then (res => {
+                window.location.reload()
+            })
         }
     }
 
@@ -110,8 +111,9 @@ class DeleteTask extends Component {
             `Do you want to delete this task permanently?`,
             )
         ) {
-            api.deleteTaskById(this.props.id)
-            window.location.reload()
+            api.deleteTaskById(this.props.id).then (res => {
+                window.location.reload()
+            })
         }
     }
     render() {

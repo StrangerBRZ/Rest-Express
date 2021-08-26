@@ -6,7 +6,7 @@ class Links extends Component {
         return (
             <React.Fragment>
                 <Link to="/" className="navbar-brand">
-                    My MERN Application
+                    My MERN Application - By Gavin Zheng
                 </Link>
             </React.Fragment>
         )
