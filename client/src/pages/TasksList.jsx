@@ -67,8 +67,9 @@ class UpdateTask extends Component {
         const payload = { _id, status }
         
 
-        api.updateTask(_id, payload);
-        window.location.reload()
+        api.updateTask(_id, payload).then (res => {
+            window.location.reload()
+        })
     }
 
     render() {
