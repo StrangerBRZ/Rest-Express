@@ -67,9 +67,10 @@ class UpdateTask extends Component {
         const payload = { _id, status }
         
 
-        api.updateTask(_id, payload).then (res => {
+        api.updateTask(_id, payload).then(res =>{
             window.location.reload()
-        })
+        });
+        
     }
 
     render() {
@@ -91,9 +92,9 @@ class DeleteTasks extends Component {
                 `Do you want to delete all the tasks permanently?`,
             )
         ) {
-            api.deleteAllTasks().then (res => {
+            api.deleteAllTasks().then(res =>{
                 window.location.reload()
-            })
+            });
         }
     }
 
@@ -112,9 +113,9 @@ class DeleteTask extends Component {
             `Do you want to delete this task permanently?`,
             )
         ) {
-            api.deleteTaskById(this.props.id).then (res => {
+            api.deleteTaskById(this.props.id).then(res =>{
                 window.location.reload()
-            })
+            });
         }
     }
     render() {
@@ -217,7 +218,7 @@ class ToDoList extends Component {
 
     getTableRow(task) {
         return(
-            <tr key={task._id}><td key={task._id}><UpdateTask id={task._id} originalStatus={task.status}></UpdateTask> {task.name} <DeleteTask id={task._id}></DeleteTask></td></tr>
+            <tr key={task._id}><td key={task._id}><UpdateTask id={task._id} originalStatus={task.status}></UpdateTask><span> {task.name} </span><DeleteTask id={task._id}></DeleteTask></td></tr>
         )
     }
     render() {
@@ -262,7 +263,7 @@ class DoneList extends Component {
 
     getTableRow(task) {
         return(
-            <tr key={task._id}><td key={task._id}><UpdateTask id={task._id} originalStatus={task.status}></UpdateTask> {task.name} <DeleteTask id={task._id}></DeleteTask></td></tr>
+            <tr key={task._id}><td key={task._id}><UpdateTask id={task._id} originalStatus={task.status}></UpdateTask><span> {task.name} </span><DeleteTask id={task._id}></DeleteTask></td></tr>
         )
     }
     render() {
@@ -283,7 +284,7 @@ class SearchTables extends Component {
             for (i = 0; i < tr.length; i++) {
               td = tr[i].getElementsByTagName("td")[0];
               if (td) {
-                if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                if (td.getElementsByTagName("span")[0].innerHTML.toUpperCase().indexOf(filter) > -1) {
                   tr[i].style.display = "";
                 } else {
                   tr[i].style.display = "none";
