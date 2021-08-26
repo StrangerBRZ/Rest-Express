@@ -115,10 +115,26 @@ getAllTasks = async (req, res) => {
     }).catch(err => console.log(err))
 }
 
+// find recent 10 completed tasks
+getDoneTasks = (req, res) => {
+    Task.find({ status: true }).sort({ updatedAt: -1}).limit(10).exec((err, tasks) => {
+        if (err) {
+            return res.status(400).json({ success: false, error: err })
+        }
+        if (!tasks.length) {
+            return res
+                .status(404)
+                .json({ success: false, error: `Task not found` })
+        }
+        return res.status(200).json({ success: true, data: tasks })
+    })
+}
+
 module.exports = {
     createTask,
     updateTask,
     deleteAllTasks,
     deleteTask,
+    getDoneTasks,
     getAllTasks,
 }

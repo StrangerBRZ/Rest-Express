@@ -240,7 +240,7 @@ class DoneList extends Component {
 
     componentDidMount = async () => {
         var n_tasks = {}
-        await api.getAllTasks().then(tasks => {
+        await api.getDoneTasks().then(tasks => {
             n_tasks = tasks.data.data;
         })
         var n_rows = [];
